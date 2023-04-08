@@ -17,12 +17,16 @@ const TodoWrapper = () => {
     if (newTask === "") {
       alert("Task input is empty!");
     } else {
-      const task = {
-        id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
-        task: newTask,
-      };
-      setTodoList([...todoList, task]);
+	      const task = {
+	        id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+	        task: newTask,
+	      };
+	      setTodoList([...todoList, task]);
     }
+  };
+
+  const deleteTask = (id: number): void => {
+  	setTodoList(todoList.filter(todo => todo.id !== id));
   };
 
   return (
@@ -30,7 +34,7 @@ const TodoWrapper = () => {
       <h1>Get Things Done !</h1>
       <TodoForm addTask={addTask} />
       {todoList.map((task) => {
-        return <Task task={task} />;
+        return <Task task={task} deleteTask={deleteTask} />;
       })}
     </div>
   );

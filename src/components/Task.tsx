@@ -7,15 +7,16 @@ interface Iprops {
     id: number;
     task: string;
   };
+  deleteTask: (id: number) => void;
 }
 
-const Task: React.FC<Iprops> = ({ task }) => {
+const Task: React.FC<Iprops> = ({ task, deleteTask }) => {
   return (
     <div className="Todo">
       {task.task}
       <div>
         <FontAwesomeIcon icon={faPenToSquare} />
-        <FontAwesomeIcon icon={faTrash} />
+        <FontAwesomeIcon icon={faTrash} onClick={() => deleteTask(task.id)} />
       </div>
     </div>
   );
