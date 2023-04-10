@@ -11,12 +11,19 @@ interface Iprops {
     id: number;
     task: string;
     completed: boolean;
+    isEditing: boolean;
   };
   deleteTask: (id: number) => void;
   markCompleted: (id: number) => void;
+  editTask: (id: number) => void;
 }
 
-const Task: React.FC<Iprops> = ({ task, deleteTask, markCompleted }) => {
+const Task: React.FC<Iprops> = ({
+  task,
+  deleteTask,
+  markCompleted,
+  editTask,
+}) => {
   return (
     <div className="Todo">
       <div className={`${task.completed === true ? "completed" : ""}`}>
@@ -28,7 +35,11 @@ const Task: React.FC<Iprops> = ({ task, deleteTask, markCompleted }) => {
           className="fa-icon"
           onClick={() => markCompleted(task.id)}
         />
-        <FontAwesomeIcon icon={faPenToSquare} className="fa-icon" />
+        <FontAwesomeIcon
+          icon={faPenToSquare}
+          className="fa-icon"
+          onClick={() => editTask(task.id)}
+        />
         <FontAwesomeIcon
           icon={faTrash}
           className="fa-icon"
